@@ -1,0 +1,105 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n dreamdiarytags %}
+
+{% block page_title %}{% if network %}{% trans 'Edit network' %}{% else %}{% trans 'Create new network' %}{% endif %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-supervisor page-network {% if network %}page-edit-network{% else %}page-new-network{% endif %}{% endblock %}
+
+{% block page_stylesheets %}
+<link rel="stylesheet" href="/static/dreamdiary/css/network-canvas-edit.css" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_scripts_bottom %}
+<script type="text/javascript" src="/static/dreamdiary/js/network-canvas-supervisor-edit.js"></script>
+<script type="text/javascript" src="/static/dreamdiary/js/jquery.zoomooz.min.js"></script>
+{% endblock %}
+
+{% block fluid_column %}
+
+  <form method="post">
+
+    <div class="header">
+    {% if network %}
+      <div class="color" title="{{ network.color.title }}" data-color-item-id="{{ network.id }}" data-color-item-type="network">
+        <span style="{% if network.color.color %}background-color:{{ network.color.color }};{% endif %}"></span>
+      </div>
+    {% endif %}
+      <div class="title">
+        <input type="text" name="networkTitle" placeholder="{% trans 'Type network title here...' %}" value="{{ network.title }}" {% if not network %}autofocus="autofocus"{% endif %} />
+      </div>
+      <div class="actions">
+        {% if network %}
+        <a class="action share modalWindow" href="{% url supervisor_share_network network.id %}" title="{% trans 'Share' %}"></a>
+        <a class="action view" href="{% url network network.id %}" title="{% trans 'View' %}"></a>
+        {% endif %}
+        <span class="action scale scale-item scale-minimap" title="{% trans 'Minimap' %}"></span>
+      </div>
+    </div>
+
+    <div id="network-canvas-outer-wrap">
+
+      <div id="network-canvas-container">
+        <div id="network-canvas-handle">
+          <div id="zoomViewport">
+            <div id="zoomContainer">
+              <div id="network-canvas">
+
+                {% for connection in network.connections %}
+                  <ul class="network-canvas-item-container active" data-sortable-connect-id="canvas-active" data-coord="{% hierarchy_item_coord network.hierarchy_data connection.task.id %}">
+                    {% include "dreamdiary/supervisor/snippets/task.html" with task=connection.task %}
+                  </ul>
+                {% empty %}
+                  <ul class="network-canvas-item-container inactive" data-sortable-connect-id="canvas-inactive"></ul>
+                {% endfor %}
+
+                {% for connector in network.hierarchy_connectors %}
+                  {% if connector.type == "connector-vertical" %}
+                  <div class="network-canvas-item-connector vertical active" data-coord="{{ connector.x }}_{{ connector.y }}"></div>
+                  {% else %}
+                  <div class="network-canvas-item-connector horizontal active" data-coord="{{ connector.x }}_{{ connector.y }}"></div>
+                  {% endif %}
+                {% endfor %}
+
+              </div><!-- /#network-canvas -->
+            </div><!-- /#zoomContainer -->
+          </div><!-- /#zoomViewport -->
+        </div><!-- /#network-canvas-handle -->
+      </div><!-- /#network-canvas-container -->
+    </div><!-- /#network-canvas-outer-wrap -->
+
+    <div class="actions cf">
+      <input id="save-network" class="button-1" type="submit" name="save" value="{% trans 'Save' %}" />
+      {% if network %}
+      <div style="float:right;">
+        {% if network.is_archived %}
+          <input class="button-2" type="submit" name="unarchive" value="{% trans 'Remove from archive' %}" />
+          {% if network.can_be_deleted %}<input class="button-3" type="submit" name="delete" value="{% trans 'Remove' %}" />{% endif %}
+        {% else %}
+          <input class="button-2" type="submit" name="archive" value="{% trans 'Move to archive' %}" />
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Field for storing connector coordinates -->
+    <input type="hidden" name="networkdata" id="network-data" value="" />
+
+  </form>
+
+{% endblock %}
+
+{% block fixed_column %}
+
+  <div class="header">
+    <h2>{% trans 'Tasks' %}</h2>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+      <a class="action add" href="{% url supervisor_edit_task %}" title="{% trans 'Create new' %}"></a>
+    </div>
+    <div class="search js-filter-search" data-filter-id="task">
+      <form><input type="text" value="" placeholder="{% trans 'Search tasks...' %}" /></form>
+    </div>
+  </div>
+
+  {% include "dreamdiary/supervisor/snippets/task_list.html" with items=tasks bottom_item=task_bottom_item %}
+
+{% endblock %}

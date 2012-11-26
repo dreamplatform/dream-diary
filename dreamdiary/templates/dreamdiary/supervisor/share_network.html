@@ -1,0 +1,77 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans 'Share network' %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-supervisor page-share-network show-all-items{% if not active_groups %} not-shared{% endif %}{% endblock %}
+
+{% block global_stylesheets %}
+  <link rel="stylesheet" href="/static/dreamdiary/css/reset.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="/static/dreamdiary/css/share-network.css" type="text/css" media="all" />
+{% endblock %}
+
+{% block global_scripts_bottom %}
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/static/dreamdiary/js/share-network.js"></script>
+{% endblock %}
+
+{% block page_container %}
+
+  <div id="header">
+    <h1>{% trans "Share network" %}: {{ network.title }}</h1>
+  </div><!-- /#header-->
+
+  <div id="select-view" class="cf">
+    <span class="action all-items">{% trans "Select groups" %}</span>
+    <span class="action selected-items">{% trans "Show selected" %} (<span id="selected-counter">{{ active_groups|length }}</span>)</span>
+  </div><!-- /#select-view -->
+
+  <div id="filters">
+    <div class="filtering cf">
+      <div class="search">
+        <form><input type="text" placeholder="{% trans 'Search groups' %}..." /></form>
+      </div>
+      {% include 'dreamdiary/supervisor/snippets/group_list_pagination.html' with items=groups %}
+    </div>
+  </div><!-- /#filters -->
+
+  <div id="views">
+
+    <div class="view" id="all-items">
+      {% if groups %}
+        {% include 'dreamdiary/supervisor/snippets/group_list_list.html' with items=groups %}
+      {% else %}
+        <ul class="item-list">
+            <li class="empty">{% trans "There are no groups you can share networks with" %}</li>
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="view" id="selected-items">
+      {% if active_groups %}
+          {% include 'dreamdiary/supervisor/snippets/group_list_list.html' with items=active_groups %}
+      {% else %}
+          <ul class="item-list">
+              <li class="empty">{% trans "You have not shared this network with anyone" %}</li>
+          </li>
+      {% endif %}
+    </div>
+
+  </div><!-- /#views -->
+
+  <div id="footer">
+    <div class="footer-container cf">
+
+      <form class="cf" method="POST">
+          <input type="submit" class="button-1" id="share-to-groups" value="{% trans 'Save' %}" />
+      </form>
+      
+      <div class="copyright">
+        <p class="row">{% trans '#copyright' %}</p>
+        <p class="row">{% trans 'Made by Haltu Oy' %}</p>
+      </div>
+
+    </div>
+  </div><!-- /#footer -->
+
+{% endblock %}

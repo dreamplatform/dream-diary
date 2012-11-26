@@ -1,0 +1,12 @@
+{% load i18n %}
+<li data-id="{{ network.id }}" data-type="network">
+
+  <div class="title">
+    <a href="{% url network network.id %}">{{ network.title }}</a>
+  </div>
+
+  <div class="color disable-color" title="{{ network.color.title }}" data-color-item-id="{{ network.id }}" data-color-item-type="network">
+    <span style="{% if network.color.color %}background-color:{{ network.color.color }};{% endif %}"></span>
+  </div>
+
+</li>

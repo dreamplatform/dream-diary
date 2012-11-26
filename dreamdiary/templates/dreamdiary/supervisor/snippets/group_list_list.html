@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<ul class="item-list">
+  {% for group in items %}
+    {% include "dreamdiary/supervisor/snippets/group.html" with group=group %}
+  {% endfor %}
+</ul>

@@ -1,0 +1,22 @@
+{% load i18n dreamdiarytags %}
+
+<li class="archive-item" data-id="{{ network.id }}" data-type="network">
+
+  <div class="title">
+    <a href="{% url network network.id %}">{{ network.title }}</a>
+  </div>
+
+  <div class="color" title="{{ network.color.title }}" data-color-item-id="{{ network.id }}" data-color-item-type="network">
+    <span style="{% if network.color.color %}background-color:{{ network.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <form class="archive-actions-form" method="post" action="?p={{ items.number}}">
+      {% if network.can_be_deleted %}<input type="submit" name="delete" value="" class="action delete" title="{% trans 'Remove' %}" />{% endif %}
+      <input type="submit" name="unarchive" value="" class="action unarchive" title="{% trans 'Remove from archive' %}" />
+      <input type="hidden" name="type" value="network" />
+      <input type="hidden" name="id" value="{{ network.id }}" />
+    </form>
+  </div>
+
+</li>

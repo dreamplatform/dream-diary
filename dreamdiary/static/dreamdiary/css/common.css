@@ -1,0 +1,1638 @@
+/*========================================================
+  Base - Layout
+========================================================*/
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {}
+
+
+/*========================================================
+  Base - Links
+========================================================*/
+
+a, a:visited, a:hover, a:focus, a:active {
+  text-decoration: none;
+  outline: 0;
+}
+a, a:visited { 
+  color: #3B8DC0;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/*========================================================
+  Base - Typography
+========================================================*/
+
+body, input, textarea, button, select {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 23px;
+  color: #063145;
+}
+.fontface body, .fontface input, .fontface textarea, .fontface button, .fontface select {
+  font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h1, h2, h3 {
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+}
+.fontface h1, .fontface h2, .fontface h3 {
+  font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+b, strong {
+  font-weight: bold;
+}
+small {
+  font-size: 85%;
+}
+ins {
+  text-decoration: none;
+}
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+
+/*========================================================
+  Base - Forms
+========================================================*/
+
+input, textarea {
+  width: 100%;
+  border: 1px solid #E0E0E0;
+  background: #FFFFFF;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Prevent iPad from applying text-shadow */
+  -webkit-appearance: none
+}
+input {
+  padding: 9px;
+  /* Normalizes input field height across browsers (except Opera's, standard line-height 18px) */
+  line-height: 17px;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: none;
+  padding: 10px;
+}
+label, button, input[type="button"], input[type="reset"], input[type="submit"] {
+/* Give clickable elements hand cursor */
+  cursor: pointer;
+}
+.boxshadow textarea:active, .boxshadow textarea:focus, .boxshadow input[type="text"]:active, .boxshadow input[type="text"]:focus {
+  -webkit-box-shadow:  0px 0px 5px 0px rgba(62, 142, 192, 0.5);
+  box-shadow:  0px 0px 5px 0px rgba(62, 142, 192, 0.5);
+  border-color: #3e8ec0 !important;
+}
+::-webkit-input-placeholder {
+    color: #B0B0B0 !important;
+    font-style: italic !important;
+}
+:-moz-placeholder {
+    color: #B0B0B0 !important;
+    font-style: italic !important;
+}
+
+
+/*========================================================
+  Base - Embedded content
+========================================================*/
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+
+/*========================================================
+  Base - Non-semantic helper classes
+========================================================*/
+
+.hidden {
+  display: none;
+}
+.clear {
+  clear: both;
+  font: 1px/1px sans-serif;
+  height: 1px;
+  overflow: hidden;
+  visibility: hidden;
+}
+.cf:before, .cf:after {
+  content: "";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+.cf {
+  *zoom: 1;
+}
+
+
+/*========================================================
+  Content - Layout
+========================================================*/
+
+html {
+  background: #1590d6 url(/static/dreamdiary/img/bg.jpg) no-repeat left top;
+}
+body {
+  position: relative;
+}
+#page {
+  padding-top: 10px;
+  margin-left: 60px;
+  min-width: 760px;
+}
+
+/* Columns layout
+   - Dev note 1: #content-container padding-left & #col-fixed width & right must be equal size
+   - Dev note 2: #page min-width must be at least twice the size of #col-fixed width
+*/
+
+#content-container {
+  position: relative;
+  padding-left: 340px;
+  z-index: 2;
+}
+#col-fluid, #col-fixed {
+  float: left;
+  position: relative;
+}
+#col-fluid {
+  width: 100%;
+}
+#col-fixed {
+  width: 340px;
+  right: 340px;
+  margin-left: -100%;
+}
+
+/* Fluid column content layout */
+#col-fluid .col-content {
+  max-width: 700px;
+  margin-right: 10px;
+}
+
+/* Fixed column content layout */
+#col-fixed .col-content {
+  margin-right: 20px; /* Space between the columns */
+  margin-left: 10px;
+}
+
+/*========================================================
+  Dreamwidget Menu
+========================================================*/
+
+/* Wrappers */
+
+#dw-menu {
+  position: fixed;
+  width: 60px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9998;
+  padding-top: 125px;
+  border-right: 1px solid #0c2332;
+  background: #19415b;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.rgba.boxshadow #dw-menu {
+  -webkit-box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.6);
+}
+.fontface #dw-menu {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+#dw-menu-content {
+  width: 100%;
+  border-top: 1px solid #146f9d;
+  padding-top: 10px;
+  background: #19415b;
+}
+
+/* Buttons */
+
+.dw-menu-button {
+  display: block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px 5px 5px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.dw-menu-button-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.dw-menu-button:hover .dw-menu-button-icon {
+  background-position: 0 -50px;
+}
+.dw-menu-button.active .dw-menu-button-icon {
+  background-position: 0 -100px;
+}
+.dw-menu-button.active:hover .dw-menu-button-icon,
+.dw-menu-button:active .dw-menu-button-icon {
+  background-position: 0 -150px;
+}
+
+/* Button backgrounds */
+
+.dw-menu-button.home .dw-menu-button-icon {
+  background-image: url(/static/dreamdiary/img/button-dreamwidget-home.png);
+}
+.dw-menu-button.archive .dw-menu-button-icon {
+  background-image: url(/static/dreamdiary/img/button-dreamwidget-archive.png);
+}
+
+/* Tooltips */
+
+.dw-menu-button-tooltip {
+  display: none;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  margin: -14px 0 0 15px;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  background: #19415B;
+  color: #bee5ff;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.fontface .dw-menu-button-tooltip {
+  font-weight: 600;
+}
+.dw-menu-button:hover .dw-menu-button-tooltip {
+  display: block;
+}
+.dw-menu-button:hover .dw-menu-button-tooltip:hover {
+  display: none;
+}
+.dw-menu-button-tooltip span {
+  display: block;
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  margin-top: -5px;
+  border-right: 5px solid #19415B;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+/*========================================================
+  Content - Color element
+========================================================*/
+
+.color {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #E0E0E0;
+  padding: 2px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.color span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: #F0F0F0; /* Default color */
+}
+
+
+/*========================================================
+  Content - Color selector
+========================================================*/
+
+.color-selector {
+  display: none;
+  position: absolute;
+  width: 276px;
+  z-index: 99999;
+}
+.color-selector .title {
+  position: relative;
+  padding: 10px 45px 10px 15px;
+  background-color: #303030;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: bold;
+}
+.fontface .color-selector .title {
+  font-weight: 600;
+}
+.color-selector .arrow {
+  border-right: 8px solid #303030;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  height: 0;
+  width: 0;
+  /* Positioning */
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  margin-top: -8px;
+}
+.color-selector .title .close {
+  display: block;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 34px;
+  height: 40px;
+  background: transparent url(/static/dreamdiary/img/dialog-close.png) no-repeat left top;
+  cursor: pointer;
+}
+.color-selector .title .close:hover {
+  background-position: left bottom;
+}
+.color-selector .color-swatch {
+  padding: 10px 5px 0 15px;
+  border: 2px solid #E0E0E0;
+  border-top: 0;
+  background: #F5F5F5;
+}
+.color-selector.activeColor .color-swatch {
+  border-bottom: 0;
+}
+.color-selector .color-item-wrap {
+  float: left;
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  margin: 1px 11px 11px 1px;
+  border: 1px solid #D0D0D0;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.color-selector .color-item-wrap.active {
+  margin: 0 10px 10px 0;
+  border: 2px solid #035C16;
+}
+.color-selector .color-item {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.color-selector .active-color {
+  display: none;
+  position: relative;
+  padding: 10px 15px;
+  border: 2px solid #E0E0E0;
+  border-top: 0;
+  border-bottom: 0;
+  background: #F5F5F5;
+}
+.color-selector.activeColor .active-color {
+  display: block;
+}
+.color-selector .active-color input {
+  padding-left: 40px;
+}
+.color-selector .active-color .color-indicator {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  position: absolute;
+  left: 22px;
+  top: 50%;
+}
+.color-selector .actions {
+  display: none;
+  padding: 10px 15px;
+  border: 2px solid #E0E0E0;
+  border-top-width: 1px;
+  background: #F5F5F5;
+}
+.color-selector.activeColor .actions {
+  display: block;
+}
+
+/*========================================================
+  Content - Buttons
+========================================================*/
+
+.button-1, .button-2, .button-3,
+a.button-1, a.button-2, a.button-3,
+input.button-1, input.button-2, input.button-3 {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px 15px;
+  margin: 0 10px 0 0;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+/* A little hack to change the margin from right to left, when buttons are aligned to right */
+.actions > div > .button-1, .actions > div > .button-2, .actions > div > .button-3,
+.actions > div >  a.button-1, .actions > div >  a.button-2, .actions > div > a.button-3,
+.actions > div >  input.button-1, .actions > div > input.button-2, .actions > div > input.button-3 {
+  margin: 0 0 0 10px;
+}
+.button-1:hover, .button-2:hover, .button-3:hover,
+a.button-1:hover, a.button-2:hover, a.button-3:hover,
+input.button-1:hover, input.button-2:hover, input.button-3:hover {
+  text-decoration: none;
+}
+.button-1, a.button-1, input.button-1 {
+  background-color: #67a31e;
+}
+.button-1:hover, a.button-1:hover, input.button-1:hover {
+  background-color: #74b822;
+}
+.button-1:focus, a.button-1:focus, input.button-1:focus,
+.button-1:active, a.button-1:active, input.button-1:active {
+  background-color: #558818;
+}
+.button-2, a.button-2, input.button-2 {
+  background-color: #8c989f;
+}
+.button-2:hover, a.button-2:hover, input.button-2:hover {
+  background-color: #99a7af;
+}
+.button-2:focus, a.button-2:focus, input.button-2:focus,
+.button-2:active, a.button-2:active, input.button-2:active {
+  background-color: #6f7d85;
+}
+.button-3, a.button-3, input.button-3 {
+  background-color: #cb4121;
+}
+.button-3:hover, a.button-3:hover, input.button-3:hover {
+  background-color: #de4724;
+}
+.button-3:focus, a.button-3:focus, input.button-3:focus,
+.button-3:active, a.button-3:active, input.button-3:active {
+  background-color: #af3113;
+}
+
+
+/*========================================================
+  Content - Headers
+========================================================*/
+
+.col-content .header {
+  position: relative;
+  padding: 10px 15px;
+  background: #063145;
+}
+.col-content .header h1,
+.col-content .header h2 {
+  padding: 5px 0;
+  line-height: 20px;
+  color: #fff;
+  font-size: 18px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.col-content .header > .color {
+  border-color: #E0E0E0;
+}
+.col-content .header > .title > input {
+  padding: 2px 6px;
+  border: 0;
+  background: #0a587c;
+  color: #fff;
+  font-size: 18px;
+  line-height: 26px;
+  font-style: italic;
+}
+.col-content .header > .title > input:focus,
+.col-content .header > .title > input:active {
+  background: #0a587c;
+  border: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.col-content .header > .title > input::-webkit-input-placeholder {
+    color: #53b1eb !important;
+    font-style: italic;
+}
+.col-content .header > .title > input:-moz-placeholder {
+    color: #53b1eb !important;
+    font-style: italic;
+}
+.fontface .col-content .header > .title > input {
+  font-weight: 600;
+}
+.col-content .header .actions {
+  /* Position */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.col-content .header .actions .action {
+  float: right;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  background-color: #488e1e;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+.col-content .header .actions .action:hover {
+  background-color: #58ad25;
+}
+.col-content .header .actions .add {
+  background-image: url(/static/dreamdiary/img/icon-add-active.png);
+}
+.col-content .header .actions .open-search {
+  background-image: url(/static/dreamdiary/img/icon-search-active.png);
+}
+.col-content .header .actions .edit {
+  background-image: url(/static/dreamdiary/img/icon-edit-active.png);
+}
+.col-content .header .actions .share {
+  background-image: url(/static/dreamdiary/img/icon-share-active.png);
+}
+.col-content .header .actions .scale {
+  background-image: url(/static/dreamdiary/img/icon-minimap-active.png);
+}
+.col-content .header .actions .view {
+  background-image: url(/static/dreamdiary/img/icon-view-active.png);
+}
+.col-content .header .search {
+  display: none;
+  padding-top: 10px;
+}
+.col-content .header .search input {
+  padding: 5px 5px 5px 36px;
+  border: 0;
+  color: #fff;
+  background-color: #0a587c;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-image: url(/static/dreamdiary/img/icon-search-active.png);
+  font-weight: 600;
+  font-style: normal;
+}
+.col-content .header .search.filter-searching input {
+  background-image: url(/static/dreamdiary/img/spinner-white.gif);
+}
+.col-content .header .search input:focus,
+.col-content .header .search input:active {
+  background-color: #0a587c;
+  border: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.col-content .header .search input::-webkit-input-placeholder {
+  color: #53b1eb !important;
+  font-style: italic;
+}
+.col-content .header .search input:-moz-placeholder {
+  color: #53b1eb !important;
+  font-style: italic;
+}
+
+
+/*========================================================
+  Content - List pagination
+========================================================*/
+
+.pagination {
+  position: relative;
+  padding: 10px 0;
+  background: #FFFFFF;
+}
+.pagination.top {
+  border-bottom: 1px solid #E9E9E9;
+}
+.pagination.bottom {
+  border-top: 5px solid #E9E9E9;
+}
+.pagination .previous, .pagination .next, .pagination .previous-inactive, .pagination .next-inactive {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  top: 10px;
+}
+.pagination .previous, .pagination .previous-inactive {
+  background-image: url(/static/dreamdiary/img/pagination-left-inactive.png);
+  left: 15px;
+}
+.pagination .next, .pagination .next-inactive {
+  background-image: url(/static/dreamdiary/img/pagination-right-inactive.png);
+  right: 15px;
+}
+.pagination .previous {
+  background-image: url(/static/dreamdiary/img/pagination-left.png);
+  left: 15px;
+}
+.pagination .next {
+  background-image: url(/static/dreamdiary/img/pagination-right.png);
+  right: 15px;
+}
+.pagination .previous:hover, .pagination a.next:hover {
+  background-color: #58ad25;
+}
+.pagination .previous:hover {
+  background-image: url(/static/dreamdiary/img/pagination-left-active.png);
+  left: 15px;
+}
+.pagination .next:hover {
+  background-image: url(/static/dreamdiary/img/pagination-right-active.png);
+  right: 15px;
+}
+.pagination .pages {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #B0B0B0;
+  text-align: center;
+}
+.fontface .pagination .pages {
+  font-weight: 600;
+}
+.pagination form {
+  display: inline;
+}
+.pagination .pages input.current {
+  width: 40px;
+  padding: 3px;
+  margin: 0 10px;
+  color: #505050;
+  font-size: 13px;
+  text-align: center;
+}
+.fontface .pagination .pages input.current {
+  font-weight: 600;
+}
+.pagination .pages .all {}
+
+
+/*========================================================
+  Content - Student list
+========================================================*/
+
+ul.user-list {
+  background: #FFFFFF;
+}
+
+/* Empty list notification */
+
+ul.user-list > li.empty {
+  position: relative;
+  background: #FFFFFF;
+  padding: 15px;
+}
+ul.user-list > li.empty a,
+ul.user-list > li.empty span {
+  display: block;
+  padding: 50px 0;
+  background: #F9F9F9;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.fontface ul.user-list > li.empty a,
+.fontface ul.user-list > li.empty span {
+  font-weight: 600;
+}
+ul.user-list > li.empty a:hover {
+  background: #58AD25;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* List items */
+
+ul.user-list a {
+  display: block;
+  position: relative;
+  padding: 15px 62px 15px 55px;
+  border-bottom: 1px solid #E9E9E9;
+  background: #FFFFFF;
+  font-size: 14px;
+  line-height: 20px;
+  color: #063145;
+}
+ul.user-list a:hover {
+  background: #F9F9F9;
+  text-decoration: none;
+}
+ul.user-list .active a {
+  background: #FFFFCC;
+  text-decoration: none;
+}
+ul.user-list a .title {
+  display: block;
+}
+ul.user-list a .icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  /* Positioning */
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+ul.user-list a .icon img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 0;
+}
+ul.user-list a .percentage {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  color: #909090;
+  font-size: 12px;
+  white-space: nowrap;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+/*========================================================
+  Content - Network list
+========================================================*/
+
+/* Wrappers */
+
+ul.network-list {
+  background: #FFFFFF;
+}
+ul.network-list li {
+  position: relative;
+  background: #FFFFFF;
+}
+ul.network-list li:hover {
+  background: #F9F9F9;
+}
+
+/* Empty list notification */
+
+ul.network-list > li.empty {
+  position: relative;
+  background: #FFFFFF;
+  padding: 15px;
+}
+ul.network-list > li.empty a,
+ul.network-list > li.empty span {
+  display: block;
+  padding: 50px 0;
+  background: #F9F9F9;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.fontface ul.network-list > li.empty a,
+.fontface ul.network-list > li.empty span {
+  font-weight: 600;
+}
+ul.network-list > li.empty a:hover {
+  background: #58AD25;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Title block */
+
+ul.network-list .title a {
+  position: relative;
+  display: block;
+  padding: 15px 15px 15px 55px;
+  border-bottom: 1px solid #E9E9E9;
+  font-size: 14px;
+  line-height: 20px;
+  color: #063145;
+}
+ul.network-list .title a:hover {
+  text-decoration: none;
+}
+
+/* Color block */
+
+ul.network-list .color {
+  /* Positioning */
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
+/* Actions block */
+
+ul.network-list .actions {
+  display: block;
+  font-size: 12px;
+  line-height: 20px;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+ul.network-list .actions > a {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  padding: 7px;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+ul.network-list .actions > a.edit {
+  background-image: url(/static/dreamdiary/img/icon-edit.png);
+}
+ul.network-list .actions > a.edit:hover {
+  background-image: url(/static/dreamdiary/img/icon-edit-active.png);
+}
+ul.network-list .actions > a.share {
+  background-image: url(/static/dreamdiary/img/icon-share.png);
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+}
+ul.network-list .actions > a.share.active {
+  background-image: url(/static/dreamdiary/img/icon-share-shared.png);
+}
+ul.network-list .actions > a.share:hover {
+  background-image: url(/static/dreamdiary/img/icon-share-active.png);
+}
+ul.network-list .actions > a:hover {
+  background-color: #58ad25;
+}
+
+/* jQuery UI sortable - placeholder */
+
+ul.network-list li.ui-sortable-placeholder {
+  background: #F0F0F0;
+}
+
+/* jQuery UI sortable - helper */
+
+ul.network-list li.ui-sortable-helper,
+ul.network-list li.ui-sortable-helper:hover {
+  background: #FFFFFF;
+}
+.rgba ul.network-list li.ui-sortable-helper,
+.rgba ul.network-list li.ui-sortable-helper:hover {
+  background: rgba(255,255,255,0.8);
+}
+ul.network-list li.ui-sortable-helper .title a,
+ul.network-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid #FFFFFF;
+  text-decoration: none;
+}
+.rgba ul.network-list li.ui-sortable-helper .title a,
+.rgba ul.network-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid rgba(255,255,255,0);
+}
+.rgba.boxshadow ul.network-list li.ui-sortable-helper {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3); 
+}
+
+/* jQuery UI sortable - succesful sort indicator */
+
+ul.network-list li.sort-successful,
+ul.network-list li.sort-successful:hover {
+  background: #063145;
+}
+ul.network-list li.sort-successful .title a,
+ul.network-list li.sort-successful .title a:hover {
+  border-color: #063145;
+  color: #FFFFFF;
+}
+ul.network-list li.sort-successful .actions {
+  display: none;
+}
+
+/*========================================================
+  Content - Task list
+========================================================*/
+
+/* Wrappers */
+
+ul.task-list {
+  background: #FFFFFF;
+}
+ul.task-list > li {
+  position: relative;
+  background: #FFFFFF;
+}
+ul.task-list > li:hover {
+  background: #F9F9F9;
+}
+
+/* Empty list notification */
+
+ul.task-list > li.empty {
+  position: relative;
+  background: #FFFFFF;
+  padding: 15px;
+}
+ul.task-list > li.empty a,
+ul.task-list > li.empty span {
+  display: block;
+  padding: 50px 0;
+  background: #F9F9F9;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.fontface ul.task-list > li.empty a,
+.fontface ul.task-list > li.empty span {
+  font-weight: 600;
+}
+ul.task-list > li.empty a:hover {
+  background: #58AD25;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Title block */
+
+ul.task-list .title a {
+  position: relative;
+  display: block;
+  padding: 15px 15px 15px 55px;
+  border-bottom: 1px solid #E9E9E9;
+  font-size: 14px;
+  line-height: 20px;
+  color: #063145;
+}
+ul.task-list.show-actions .title a {
+  padding: 15px 40px 15px 55px;
+}
+ul.task-list .title a:hover {
+  text-decoration: none;
+}
+ul.task-list .title a .arrow {
+  display: none;
+}
+
+/* Color block */
+
+ul.task-list .color {
+  /* Positioning */
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
+/* Actions block */
+
+ul.task-list > li > .actions {
+  display: none;
+  font-size: 12px;
+  line-height: 20px;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  cursor: pointer;
+}
+ul.task-list.show-actions > li > .actions {
+  display: block;
+}
+ul.task-list > li > .actions .action {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  padding: 7px;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+ul.task-list > li > .actions .action:hover {
+  text-decoration: none;
+  background-color: #58ad25;
+}
+ul.task-list > li > .actions .action.remove {
+  background-image: url(/static/dreamdiary/img/icon-remove.png);
+}
+ul.task-list > li > .actions .action.remove:hover {
+  background-image: url(/static/dreamdiary/img/icon-remove-active.png);
+}
+
+/* Info block */
+
+ul.task-list .info {
+  display: none;
+}
+
+/* jQuery UI sortable - placeholder */
+
+ul.task-list li.ui-sortable-placeholder {
+  background: #F0F0F0;
+}
+
+/* jQuery UI sortable - helper */
+
+ul.task-list li.ui-sortable-helper,
+ul.task-list li.ui-sortable-helper:hover {
+  background: #FFFFFF;
+}
+.rgba ul.task-list li.ui-sortable-helper,
+.rgba ul.task-list li.ui-sortable-helper:hover {
+  background: rgba(255,255,255,0.8);
+}
+ul.task-list li.ui-sortable-helper .title a,
+ul.task-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid #FFFFFF;
+  text-decoration: none;
+}
+.rgba ul.task-list li.ui-sortable-helper .title a,
+.rgba ul.task-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid rgba(255,255,255,0);
+}
+.rgba.boxshadow ul.task-list li.ui-sortable-helper {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3); 
+}
+
+/* jQuery UI sortable - blocked helper */
+
+.rgba.boxshadow ul.task-list li.ui-sortable-helper.blocked {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+  box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+}
+
+/* jQuery UI sortable - succesful sort indicator */
+
+ul.task-list li.sort-successful,
+ul.task-list li.sort-successful:hover {
+  background: #063145;
+}
+ul.task-list li.sort-successful .title a,
+ul.task-list li.sort-successful .title a:hover {
+  border-color: #063145;
+  color: #FFFFFF;
+}
+ul.task-list li.sort-successful .actions {
+  display: none;
+}
+
+/*========================================================
+  Content - Work list
+========================================================*/
+
+/* Wrappers */
+
+ul.work-list {
+  background: #FFFFFF;
+}
+ul.work-list > li {
+  position: relative;
+  background: #FFFFFF;
+}
+ul.work-list > li:hover {
+  background: #F9F9F9;
+}
+
+/* Empty list notification */
+
+ul.work-list > li.empty {
+  position: relative;
+  background: #FFFFFF;
+  padding: 15px;
+}
+ul.work-list > li.empty a,
+ul.work-list > li.empty span {
+  display: block;
+  padding: 50px 0;
+  background: #F9F9F9;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.fontface ul.work-list > li.empty a,
+.fontface ul.work-list > li.empty span {
+  font-weight: 600;
+}
+ul.work-list > li.empty a:hover {
+  background: #58AD25;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Title block */
+
+ul.work-list .title a {
+  position: relative;
+  display: block;
+  padding: 15px 15px 15px 55px;
+  border-bottom: 1px solid #E9E9E9;
+  font-size: 14px;
+  line-height: 20px;
+  color: #063145;
+}
+ul.work-list.show-actions .title a {
+  padding: 12px 40px 12px 50px;
+}
+ul.work-list .title a:hover {
+  text-decoration: none;
+}
+ul.work-list .title a .arrow {
+  display: none;
+}
+
+/* Color block */
+
+ul.work-list .color {
+  /* Positioning */
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
+/* Actions block */
+
+ul.work-list > li > .actions {
+  display: none;
+  font-size: 12px;
+  line-height: 20px;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+ul.work-list.show-actions > li > .actions {
+  display: block;
+}
+ul.work-list > li > .actions .action {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  padding: 7px;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+ul.work-list > li > .actions a.action:hover {
+  text-decoration: none;
+}
+
+/* Info block */
+
+ul.work-list .info {
+  display: none;
+}
+
+/* jQuery UI sortable - placeholder */
+
+ul.work-list li.ui-sortable-placeholder {
+  background: #F0F0F0;
+}
+
+/* jQuery UI sortable - helper */
+
+ul.work-list li.ui-sortable-helper,
+ul.work-list li.ui-sortable-helper:hover {
+  background: #FFFFFF;
+}
+.rgba ul.work-list li.ui-sortable-helper,
+.rgba ul.work-list li.ui-sortable-helper:hover {
+  background: rgba(255,255,255,0.8);
+}
+ul.work-list li.ui-sortable-helper .title a,
+ul.work-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid #FFFFFF;
+  text-decoration: none;
+}
+.rgba ul.work-list li.ui-sortable-helper .title a,
+.rgba ul.work-list li.ui-sortable-helper .title a:hover {
+  border-bottom: 1px solid rgba(255,255,255,0);
+}
+.rgba.boxshadow ul.work-list li.ui-sortable-helper {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3);
+  box-shadow: 0px 0px 0px 5px rgba(36, 205, 78, 0.3); 
+}
+
+/* jQuery UI sortable - blocked helper */
+
+.rgba.boxshadow ul.work-list li.ui-sortable-helper.blocked {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+  box-shadow: 0px 0px 0px 5px rgba(232, 27, 27, 0.3);
+}
+
+/* jQuery UI sortable - succesful sort indicator */
+
+ul.work-list li.sort-successful,
+ul.work-list li.sort-successful:hover {
+  background: #063145;
+}
+ul.work-list li.sort-successful .title a,
+ul.work-list li.sort-successful .title a:hover {
+  border-color: #063145;
+  color: #FFFFFF;
+}
+ul.work-list li.sort-successful .actions {
+  display: none;
+}
+
+/*========================================================
+  Content - Learning Network - Edit / Create / View
+========================================================*/
+
+.page-network #col-fluid .col-content {
+  max-width: none;
+}
+
+/* Fluid column header */
+
+.page-network #col-fluid .col-content .header {
+  padding-left: 60px;
+}
+/* Padding for supervisor "view network" */
+.page-supervisor.page-network.page-view-network #col-fluid .col-content .header {
+  padding-right: 95px;
+}
+/* Padding for supervisor "edit network" */
+.page-supervisor.page-network.page-edit-network #col-fluid .col-content .header {
+  padding-right: 130px;
+}
+/* Padding for supervisor "new network" */
+.page-supervisor.page-network.page-new-network #col-fluid .col-content .header {
+  padding-right: 60px;
+  padding-left: 15px;
+}
+.page-network #col-fluid .col-content .header .color {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  border: 0;
+  padding: 3px;
+}
+.page-network #col-fluid form > .actions {
+  padding: 10px 15px;
+  background: #f1f1f1;
+}
+
+/*========================================================
+  Content - Task - Create new / edit
+========================================================*/
+
+.info-form {}
+.info-form label {
+  display: inline-block;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+.fontface .info-form label {
+  font-weight: 600;
+}
+.info-form form > .title {
+  padding: 15px;
+  background: #fff;
+}
+  /* Make room for .color-wrap if page is page-edit-task or page-edit-work */
+.page-edit-task .info-form form > .title > div,
+.page-edit-work .info-form form > .title > div {
+  position: relative;
+  padding-left: 50px;
+}
+.info-form form > .title > div > .color-wrap {
+  width: 40px;
+  height: 40px;
+  /* Positioning */
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.info-form form > .title > div > .color-wrap .color {
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  /* Positioning */
+  position: relative;
+  left: 0;
+  top: 0;
+}
+.info-form form > .title > div > .color-wrap .color span {
+  width: 30px;
+  height: 30px;
+}
+.info-form form > .title > div > input {}
+.info-form form > .description {
+  padding: 15px;
+  background: #fff;
+}
+.info-form form > .description textarea {}
+.info-form form > .add-attachment {
+  padding: 15px 15px 30px 15px;
+  background: #fff;
+}
+.info-form form > .add-attachment input {}
+.info-form form > .add-attachment #add-attachment-button {
+  display: none;
+}
+
+.info-form .attachments {
+  background: #fff;
+}
+.info-form .attachments ul {}
+.info-form .attachments li {
+  position: relative;
+  display: block;
+  padding: 10px 56px 10px 46px;
+  border-top: 1px dashed #E0E0E0;
+  background-color: #FFFFFF;
+  background-image: url(/static/dreamdiary/img/icon-attachment.png);
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  text-decoration: none;
+}
+.info-form .attachments li .title {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.info-form .attachments li a {
+  color: #3B8DC0;
+}
+.info-form .attachments li a:hover {
+  color: #3B8DC0;
+  text-decoration: underline;
+}
+.info-form .attachments li .remove {
+  display: block; 
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  background-image: url(/static/dreamdiary/img/icon-remove.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 50%;
+}
+.info-form .attachments li .remove:hover {
+  background-color: #de4724;
+  background-image: url(/static/dreamdiary/img/icon-remove-active.png);
+}
+.info-form form > .actions {
+  padding: 10px 15px;
+  background: #f1f1f1;
+}
+
+/*========================================================
+  Content - No permissions page
+========================================================*/
+
+.page-no-permissions nav#primary-nav {
+  min-width: 760px;
+  max-width: 960px;
+}
+.page-no-permissions #content-container {
+  position: relative;
+  padding: 0;
+}
+.page-no-permissions .col-content {
+  min-width: 740px;
+  max-width: 940px;
+  padding: 0 10px;
+}
+.page-no-permissions #content-container .message {
+  padding: 50px 20px;
+  background: #fff;
+}
+
+/*========================================================
+  Content - Archive page
+========================================================*/
+
+.page-archive nav#primary-nav {
+  min-width: 760px;
+  max-width: 960px;
+}
+.page-archive #content-container {
+  position: relative;
+  padding: 0;
+}
+.page-archive .col-content {
+  min-width: 740px;
+  max-width: 940px;
+  padding: 0 10px;
+}
+
+/* Archive tabs */
+
+.page-archive .tab {
+  cursor: pointer;
+  color: #53AADF;
+  border-bottom: 2px solid transparent;
+}
+.page-archive .tab:hover {
+  border-color: #53AADF;
+}
+.page-archive .tab.active {
+  cursor: pointer;
+  color: #fff;
+}
+.page-archive .tab.active:hover {
+  border-color: transparent;
+}
+.page-archive .tab-divider {
+  color: #53AADF;
+}
+.page-archive .tab-content {
+  display: none;
+  position: relative;
+}
+.page-archive .tab-content.active {
+  display: block;
+}
+
+/* Archive search/pagination */
+
+.page-archive .search {
+  padding: 10px 15px;
+  padding-right: 50%;
+  border-bottom: 1px solid #e9e9e9;
+  background: #fff;
+}
+.page-archive .search form {}
+.page-archive .search input {
+  padding: 5px;
+  padding-left: 36px;
+  background: #fff url(/static/dreamdiary/img/icon-search.png) no-repeat 10px center;
+}
+.fontface .page-archive .search input {
+  font-weight: 600;
+}
+.page-archive .search.filter-searching input {
+  background: #fff url(/static/dreamdiary/img/spinner.gif) no-repeat 10px center;
+}
+.page-archive .pagination {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  background: transparent;
+}
+
+/* Archive list */
+
+.archive-list {
+  background: #fff;
+}
+.archive-item {
+  position: relative;
+  background: #fff;
+}
+.archive-item:hover {
+  background: #F9F9F9;
+}
+.archive-item.empty {
+  display: block;
+  position: relative;
+  padding: 15px;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.archive-item.empty:hover {
+  background: #fff;
+}
+.archive-item.empty span {
+  display: block;
+  padding: 50px 15px;
+  background: #F9F9F9;
+}
+.fontface .archive-item.empty {
+  font-weight: 600;
+}
+.archive-item .title {}
+.archive-item .title a {
+  position: relative;
+  display: block;
+  padding: 15px 95px 15px 55px;
+  border-bottom: 1px solid #E9E9E9;
+  font-size: 14px;
+  line-height: 20px;
+  color: #063145;
+}
+.archive-item .title a:hover {
+  text-decoration: none;
+}
+.archive-item .color {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+.archive-item .actions {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.archive-item .action {
+  display: block;
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.archive-item .action.delete {
+  background-image: url(/static/dreamdiary/img/icon-remove.png);
+}
+.archive-item .action.delete:hover {
+  background-image: url(/static/dreamdiary/img/icon-remove-active.png);
+}
+.archive-item .action.unarchive {
+  background-image: url(/static/dreamdiary/img/icon-unarchive.png);
+}
+.archive-item .action.unarchive:hover {
+  background-image: url(/static/dreamdiary/img/icon-unarchive-active.png);
+}
+.archive-item .action:hover {
+  background-color: #58ad25;
+}
+.archive-item .action.delete:hover {
+  background-color: #DE4724;
+}
+
+
+/*========================================================
+  Content - Layout - Footer
+========================================================*/
+
+#footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+#footer p {
+  text-align: right;
+  padding: 25px;
+  line-height: 14px;
+  font-size: 14px;
+  color: #73c1ee;
+  white-space: nowrap;
+}
+.fontface #footer p {
+  font-weight: 600;
+}
+.rgba #footer p {
+  color: rgba(255,255,255,0.5);
+}

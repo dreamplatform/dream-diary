@@ -1,0 +1,23 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans '#no permissions page meta title' %}{% endblock %}
+{% block body_class %}page-no-permissions{% endblock %}
+
+{% block page_container %}
+
+  <div id="content-container">
+    <div class="col-content">
+      <div class="message">
+        <p>{% trans '#no permissions message' %}</p>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <p>{% trans '#copyright' %}</p>
+    </div>
+  </footer><!-- /#footer -->
+
+{% endblock %}

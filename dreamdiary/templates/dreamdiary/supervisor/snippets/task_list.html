@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<div class="pagination top js-filter-paginator" data-filter-id="task" data-pagination-url="{% url ajax_paginated_snippet %}?t=task">
+
+  <div class="pages">{% trans 'Page' %}
+    <form><input type="text" class="current js-filter-current" value="{{ items.number }}" /></form> /
+    <span class="all">{{ items.paginator.num_pages }}</span>
+  </div>
+
+  {% if items.has_previous %}
+    <a href="{{ items.previous_page_number }}" class="previous js-filter-previous" title="{% trans 'Previous page' %}"></a>
+  {% else %}
+    <span class="previous-inactive"></span>
+  {% endif %}
+
+  {% if items.has_next %}
+    <a href="{{ items.next_page_number }}" class="next js-filter-next" title="{% trans 'Next page' %}"></a>
+  {% else %}
+    <span class="next-inactive"></span>
+  {% endif %}
+
+</div>
+
+<ul class="task-list sortable js-filter-content" data-filter-id="task" data-sortable-connect-id="task-list" data-sortable-connect-to="canvas-inactive">
+
+  {% if top_item %}
+   {% include "dreamdiary/supervisor/snippets/task.html" with task=top_item %}
+  {% endif %}
+
+  <!-- START LOOP - supervisor tasks  -->
+
+  {% for task in items %}
+    {% include "dreamdiary/supervisor/snippets/task.html" with task=task %}
+  {% empty %}
+
+  <li class="empty"><a href="{% url supervisor_edit_task %}">{% trans 'Create new task' %}</a></li>
+
+  {% endfor %}
+
+  <!-- END LOOP -->
+
+  {% if bottom_item %}
+    {% include "dreamdiary/supervisor/snippets/task.html" with task=bottom_item %}
+  {% endif %}
+
+</ul>

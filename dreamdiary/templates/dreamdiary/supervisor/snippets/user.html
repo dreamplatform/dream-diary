@@ -1,0 +1,10 @@
+{% load i18n dreamdiarytags %}
+
+<li {% if user.id == selected_item.id %}class="active"{% endif %}>
+  <a href="{% url network network.id user.id %}">
+    <span class="name">{{ user.get_full_name }}</span>
+    <span class="icon"><img src="/static/dreamdiary/img/user.png" alt="icon" /></span>
+    <span class="percentage">{% percentage_for_user network user %}%</span>
+  </a>
+</li>
+

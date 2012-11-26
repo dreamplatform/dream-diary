@@ -1,0 +1,309 @@
+/*========================================================
+    Network canvas - Teacher edit
+========================================================*/
+
+/* Wrappers */
+
+#network-canvas-outer-wrap {
+    position: relative;
+    height: 500px; /* A height must be set for the canvas to show correctly */
+    padding: 15px;
+    background: #FFFFFF;
+}
+#network-canvas-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+#network-canvas-handle {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+#zoomContainer, #zoomViewport {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+#network-canvas {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+/* Item container */
+
+#network-canvas > ul {
+    list-style: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    border: 2px solid #E9E9E9;
+    background: #FFFFFF;
+    /* CSS3 - BORDER RADIUS */
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+}
+#network-canvas > ul.active {
+    border-color: #303030;
+}
+.rgba.boxshadow #network-canvas > ul.canvas-item-container-highlight {
+    -webkit-box-shadow: 0px 0px 0px 10px rgba(255, 216, 0, 0.3);
+    -moz-box-shadow: 0px 0px 0px 10px rgba(255, 216, 0, 0.3);
+    box-shadow: 0px 0px 0px 10px rgba(255, 216, 0, 0.3); 
+}
+.touch.rgba.boxshadow #network-canvas > ul.canvas-item-container-highlight {
+    -webkit-box-shadow: 0px 0px 0px 30px rgba(255, 216, 0, 0.3);
+    -moz-box-shadow: 0px 0px 0px 30px rgba(255, 216, 0, 0.3);
+    box-shadow: 0px 0px 0px 30px rgba(255, 216, 0, 0.3); 
+}
+
+/* Item */
+
+#network-canvas > ul > li {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+.borderradius #network-canvas > ul > li {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+#network-canvas .ui-sortable-placeholder {
+    list-style: none;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+}
+.borderradius #network-canvas .ui-sortable-placeholder {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+/* hides placeholders inside active item containers */
+#network-canvas > ul.active .ui-sortable-placeholder {
+    display: none;
+}
+
+/* Item content - Title */
+
+#network-canvas > ul > li > .title {
+    position: absolute;
+    left: 40px;
+    top: -32px;
+}
+#network-canvas > ul > li > .title a {
+    display: block;
+    float: left;
+    max-width: 80px;
+    padding: 0 10px;
+    background: #303030;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+.fontface #network-canvas > ul > li > .title a {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+}
+#network-canvas > ul > li > .title a:hover {
+    text-decoration: none;
+}
+#network-canvas > ul > li > .title a .text {
+    overflow: hidden;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    white-space: nowrap;
+}
+#network-canvas > ul > li > .title a .arrow {
+    display: block;
+    width: 9px;
+    height: 5px;
+    background-image: url('/static/dreamdiary/img/network-title-arrow.png');
+    background-repeat: no-repeat;
+    /* Positioning */
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+
+/* Item content - Color */
+
+#network-canvas > ul > li > .color {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+}
+#network-canvas > ul > li > .color span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.borderradius #network-canvas > ul > li > .color,
+.borderradius #network-canvas > ul > li > .color span {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+
+/* Item content - Actions */
+
+#network-canvas > ul > li > .actions {
+    display: none;
+}
+
+/* Item content box */
+
+#network-canvas > ul > li > .info {
+    display: none;
+    width: 330px;
+    position: absolute;
+    top: 60px;
+    left: -147px;
+    z-index: 2;
+    cursor: auto;
+    font-size: 13px;
+    line-height: 22px;
+}
+#network-canvas > ul > li > .info > .title {
+    position: relative;
+    background-color: #303030;
+    padding: 10px 45px 10px 15px;
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: bold;
+}
+.fontface #network-canvas > ul > li > .info > .title {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+#network-canvas > ul > li > .info > .title .link a {
+    text-decoration: none;
+    color: #FFFFFF;
+    word-wrap: break-word;
+}
+#network-canvas > ul > li > .info > .title .link a:hover {
+    text-decoration: underline;
+}
+#network-canvas > ul > li > .info > .title .close {
+  display: block;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 34px;
+  height: 40px;
+  background: transparent url(/static/dreamdiary/img/dialog-close.png) no-repeat left top;
+  cursor: pointer;
+}
+#network-canvas > ul > li > .info > .title .close:hover {
+  background-position: left bottom;
+}
+#network-canvas > ul > li > .info > .actions {}
+#network-canvas > ul > li > .info > .actions .remove {
+    display: block;
+    padding: 8px 15px;
+    border: 2px solid #E0E0E0;
+    border-top: 0;
+    border-bottom-width: 1px;
+    background-color: #F5F5F5;
+    color: #CC0000;
+    text-align: center;
+    cursor: pointer;
+}
+#network-canvas > ul > li > .info > .actions .remove:hover {
+    background-color: #ffeeee;
+    text-decoration: underline;
+}
+#network-canvas > ul > li > .info > .description {
+    background: #F5F5F5;
+    padding: 8px 15px;
+    border: 2px solid #E0E0E0;
+    border-top: 0;
+    word-wrap: break-word;
+}
+#network-canvas > ul > li > .info > .attachments {
+    position: relative;
+    top: -2px;
+    border: 2px solid #E0E0E0;
+    border-top: 0;
+    background-color: #F5F5F5;
+}
+#network-canvas > ul > li > .info > .attachments ul {
+    list-style: none;
+    padding: 0 10px;
+}
+#network-canvas > ul > li > .info > .attachments ul li a {
+    display: block;
+    padding: 10px 10px 10px 30px;
+    border-top: 1px dashed #D0D0D0;
+    background-color: #F5F5F5;
+    background-image: url('/static/dreamdiary/img/icon-attachment.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    color: #3B8DC0;
+    text-decoration: none;
+}
+#network-canvas > ul > li > .info > .attachments ul li a:hover {
+    color: #3B8DC0;
+    text-decoration: underline;
+}
+#network-canvas > ul > li > .info > .attachments ul li a span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#network-canvas > ul > li > .info > .arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #303030;
+    margin-left: 157px;
+    bottom: 0;
+}
+
+/* Item connector  */
+
+#network-canvas .network-canvas-item-connector {
+    display: block;
+    background: #E9E9E9;
+    cursor: pointer;
+}
+.borderradius #network-canvas .network-canvas-item-connector {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+#network-canvas .network-canvas-item-connector.active {
+    background: #303030;
+}
+
+/* Helper */
+
+.touch.rgba.boxshadow #network-canvas .ui-sortable-helper {
+    -webkit-box-shadow: 0px 0px 0px 30px rgba(36, 205, 78, 0.3);
+    -moz-box-shadow: 0px 0px 0px 30px rgba(36, 205, 78, 0.3);
+    box-shadow: 0px 0px 0px 30px rgba(36, 205, 78, 0.3); 
+}

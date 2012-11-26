@@ -1,0 +1,22 @@
+{% load i18n dreamdiarytags %}
+
+<li class="archive-item" data-id="{{ work.id }}" data-type="work">
+
+  <div class="title">
+    <a href="{% url user_edit_work work.id %}">{{ work.title }}</a>
+  </div>
+
+  <div class="color" title="{{ work.color.title }}" data-color-item-id="{{ work.id }}" data-color-item-type="work">
+    <span style="{% if work.color.color %}background-color:{{ work.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <form class="archive-actions-form" method="post" action="?p={{ items.number}}">
+      {% if network.can_be_deleted %}<input type="submit" name="delete" value="" class="action delete" title="{% trans 'Remove' %}" />{% endif %}
+      <input type="submit" name="unarchive" value="" class="action unarchive" title="{% trans 'Remove from archive' %}" />
+      <input type="hidden" name="type" value="work" />
+      <input type="hidden" name="id" value="{{ work.id }}" />
+    </form>
+  </div>
+
+</li>

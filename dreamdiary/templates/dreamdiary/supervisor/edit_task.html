@@ -1,0 +1,87 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n dreamdiarytags %}
+
+{% block page_title %}{% if task %}{% trans 'Edit task' %}{% else %}{% trans 'Create new task' %}{% endif %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-supervisor page-task {% if task %}page-edit-task{% else %}page-new-task{% endif %}{% endblock %}
+
+{% block fluid_column %}
+
+  <div class="header">
+    <h1>{% if task %}{% trans 'Edit task' %}{% else %}{% trans 'Create new task' %}{% endif %}</h1>
+  </div>
+
+  <div class="info-form">
+    <form id="add-task" method="post">
+    
+      <div class="title">
+        <label for="task-title">{% trans 'Task title' %}</label>
+        <div>
+          {% if task %}
+          <div class="color-wrap">
+            <div class="color" title="{{ task.color.title }}" data-color-item-id="{{ task.id }}" data-color-item-type="task">
+              <span style="{% if task.color.color %}background-color:{{ task.color.color }};{% endif %}"></span>
+            </div>
+          </div>
+          {% endif %}
+          <input type="text" name="taskTitle" id="task-title" placeholder="{% trans 'Type task title here...' %}" value="{{ task.title }}" {% if not task %}autofocus="autofocus"{% endif %} />
+        </div>
+      </div>
+
+      <div class="description">
+        <label for="task-description">{% trans 'Task description' %}</label>
+        <textarea cols="100" rows="7" name="taskDesc" id="task-description" placeholder="{% trans 'Type task description here...' %}">{{ task.description }}</textarea>
+      </div>
+
+      <div class="add-attachment">
+        <label for="add-attachment">{% trans 'Attachments' %}</label>
+        <input type="text" placeholder="{% trans 'Type attachment URL here and press Enter...' %}" id="add-attachment" />
+        <span id="add-attachment-button"></span>
+      </div>
+
+      <div id="attachment-list" class="attachments">
+        <ul>
+        {% for attachment in task.attachments.all %}
+          <li>
+            <span class="title"><a href="{{ attachment.url }}" target="_blank">{{ attachment.url }}</a></span>
+            <span class="remove" title="{% trans 'Remove' %}"></span>
+            <input type="hidden" name="attachment[]" value="{{ attachment.url }}" />
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+
+      <div class="actions cf">
+        <input class="button-1" type="submit" name="save" value="{% trans 'Save' %}" />
+        {% if task %}
+        <div style="float:right;">
+          {% if task.is_archived %}
+            <input class="button-2" type="submit" name="unarchive" value="{% trans 'Remove from archive' %}" />
+            {% if task.can_be_deleted %}<input class="button-3" type="submit" name="delete" value="{% trans 'Remove' %}" />{% endif %}
+          {% else %}
+            <input class="button-2" type="submit" name="archive" value="{% trans 'Move to archive' %}" />
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+    </form>
+  </div><!-- /.task-info -->
+
+{% endblock %}
+
+{% block fixed_column %}
+
+  <div class="header">
+    <h2>{% trans 'Tasks' %}</h2>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+      <a class="action add" href="{% url supervisor_edit_task %}" title="{% trans 'Create new' %}"></a>
+    </div>
+    <div class="search js-filter-search" data-filter-id="task">
+      <form><input type="text" value="" placeholder="{% trans 'Search tasks...' %}" /></form>
+    </div>
+  </div>
+
+  {% include 'dreamdiary/supervisor/snippets/task_list.html' with items=tasks bottom_item=task_bottom_item %}
+  
+{% endblock %}

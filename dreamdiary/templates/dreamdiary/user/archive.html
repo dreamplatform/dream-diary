@@ -1,0 +1,33 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans 'Archive' %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-user page-archive{% endblock %}
+{% block dw_menu_archive %}active{% endblock %}
+
+{% block page_container %}
+
+  <div id="content-container">
+    <div class="col-content">
+
+      <div class="header">
+        <h1>{% trans 'Works' %}</h1>
+      </div>
+
+      <div style="position:relative;">
+        <div class="search js-filter-search" data-filter-id="work">
+          <form><input type="text" value="" placeholder="{% trans 'Search works...' %}" /></form>
+        </div>
+        {% include "dreamdiary/user/snippets/archive_work_list.html" with items=works bottom_item=work_bottom_item top_item=work_top_item %}
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <p>{% trans '#copyright' %}</p>
+    </div>
+  </footer><!-- /#footer -->
+
+{% endblock %}

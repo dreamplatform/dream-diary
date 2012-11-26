@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<div class="pagination top js-filter-paginator" data-filter-id="user" data-pagination-url="{% url ajax_paginated_snippet %}?t=user&amp;rt=network&amp;ri={{ network.id }}" >
+
+  <div class="pages">{% trans 'Page' %}
+    <form><input type="text" class="current js-filter-current" value="{{ items.number }}" /></form> /
+    <span class="all">{{ items.paginator.num_pages }}</span>
+  </div>
+
+  {% if items.has_previous %}
+    <a href="{{ items.previous_page_number }}" class="previous js-filter-previous" title="{% trans 'Previous page' %}"></a>
+  {% else %}
+    <span class="previous-inactive"></span>
+  {% endif %}
+
+  {% if items.has_next %}
+    <a href="{{ items.next_page_number }}" class="next js-filter-next" title="{% trans 'Next page' %}"></a>
+  {% else %}
+    <span class="next-inactive"></span>
+  {% endif %}
+
+</div>
+
+<ul class="user-list js-filter-content" data-filter-id="user">
+
+  {% for user in items %}
+    {% include 'dreamdiary/supervisor/snippets/user.html' with network=network user=user %}
+  {% empty %}
+    <li class="empty"><a class="modalWindow" href="{% url supervisor_share_network network.id %}">{% trans 'Share network' %}</a></li>
+  {% endfor %}
+
+</ul>

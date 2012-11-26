@@ -1,0 +1,469 @@
+/*========================================================
+    Network canvas - Teacher view / Student
+========================================================*/
+
+/* Wrappers */
+
+#network-canvas-outer-wrap {
+    position: relative;
+    height: 500px; /* A height must be set for the canvas to show correctly */
+    padding: 15px;
+    background: #FFFFFF;
+}
+#network-canvas-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+#network-canvas-handle {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+#zoomContainer, #zoomViewport {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+#network-canvas {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+/* Item container */
+
+#network-canvas .network-canvas-item-container {
+    list-style: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    border: 2px solid #303030;
+    background: #FFFFFF;
+    /* CSS3 - BORDER RADIUS */
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+}
+
+/* Item */
+
+#network-canvas .network-canvas-item-container > li {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+.borderradius #network-canvas .network-canvas-item-container > li {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+#network-canvas .ui-sortable-placeholder {
+    list-style: none;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+}
+.borderradius #network-canvas .ui-sortable-placeholder {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+
+/* Item content - Title */
+
+#network-canvas .network-canvas-item-container > li > .title {
+    position: absolute;
+    left: 40px;
+    top: -32px;
+}
+#network-canvas .network-canvas-item-container > li > .title > div {
+    display: block;
+    float: left;
+    max-width: 80px;
+    padding: 0 10px;
+    background: #303030;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+.fontface #network-canvas .network-canvas-item-container > li > .title > div {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+}
+#network-canvas .network-canvas-item-container > li > .title > div > .text {
+    overflow: hidden;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    white-space: nowrap;
+}
+#network-canvas .network-canvas-item-container > li > .title > div > .arrow {
+    display: block;
+    width: 9px;
+    height: 5px;
+    background-image: url('/static/dreamdiary/img/network-title-arrow.png');
+    background-repeat: no-repeat;
+    /* Positioning */
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+
+/* Item content - Color */
+
+#network-canvas .network-canvas-item-container > li > .color {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+}
+#network-canvas .network-canvas-item-container > li > .color span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.borderradius #network-canvas .network-canvas-item-container > li > .color,
+.borderradius #network-canvas .network-canvas-item-container > li > .color span {
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+
+/* Item content - Has answer indicator */
+
+#network-canvas .answer-indicator {
+    display: none;
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -6px;
+    margin-left: -6px;
+    background-color: #303030;
+}
+#network-canvas .has-answer .answer-indicator {
+    display: block;
+}
+.rgba #network-canvas .answer-indicator {
+    background-color: rgba(0,0,0,0.5);
+}
+.borderradius #network-canvas .answer-indicator{
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+
+/* Item content - Info box */
+
+#network-canvas .network-canvas-item-container > li > .info {
+    display: none;
+    width: 330px;
+    position: absolute;
+    top: 60px;
+    left: -147px;
+    z-index: 2;
+    cursor: auto;
+    font-size: 13px;
+    line-height: 22px;
+}
+
+/* Item content - Info box - Header */
+
+#network-canvas .network-canvas-item-container > li > .info > .arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #303030;
+    margin-left: 157px;
+    bottom: 0;
+}
+#network-canvas .network-canvas-item-container > li > .info > .title {
+    position: relative;
+    background-color: #303030;
+    padding: 10px 45px 10px 15px;
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: bold;
+}
+.fontface #network-canvas .network-canvas-item-container > li > .info > .title {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+#network-canvas .network-canvas-item-container > li > .info > .title .link a {
+    text-decoration: none;
+    color: #FFFFFF;
+    word-wrap: break-word;
+}
+#network-canvas .network-canvas-item-container > li > .info > .title .link a:hover {
+    text-decoration: underline;
+}
+#network-canvas .network-canvas-item-container > li > .info > .title .close {
+  display: block;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 34px;
+  height: 40px;
+  background: transparent url(/static/dreamdiary/img/dialog-close.png) no-repeat left top;
+  cursor: pointer;
+}
+#network-canvas .network-canvas-item-container > li > .info > .title .close:hover {
+  background-position: left bottom;
+}
+
+
+/* Item content - Info box - View switch */
+
+#network-canvas .network-canvas-item-container > li > .info > .view-switch {}
+#network-canvas .network-canvas-item-container > li > .info > .view-switch > span {
+    position: relative;
+    display: block;
+    float: left;
+    width: 165px;
+    padding: 5px 0;
+    background-color: #808080;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+}
+.fontface #network-canvas .network-canvas-item-container > li > .info > .view-switch > span {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+#network-canvas .network-canvas-item-container > li > .info > .view-switch > span:hover {
+    background-color: #909090;
+}
+#network-canvas .network-canvas-item-container > li > .info > .view-switch > span.active {
+    background-color: #606060;
+}
+#network-canvas .network-canvas-item-container > li > .info > .view-switch > span > .arrow {
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #606060;
+    margin-left: -6px;
+    left: 50%;
+    bottom: -6px;
+}
+#network-canvas .network-canvas-item-container > li > .info > .view-switch > span.active > .arrow {
+    display: block;
+}
+
+/* Item content - Info box - Task/Work view wrappers */
+
+#network-canvas .network-canvas-item-container > li > .info > .views {
+    background: #F5F5F5;
+    padding: 15px 15px 0 15px;
+    border: 2px solid #E0E0E0;
+    border-top: 0;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views > .tab-content {
+    display: none;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views > .tab-content.active {
+    display: block;
+}
+
+/* Item content - Info box - Work view - Wrappers */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work {}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul {}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul > li {
+    position: relative;
+}
+
+/* Item content - Info box - Work view - Work empty */
+
+#network-canvas .network-canvas-item-container > li.no-answer > .info > .views .tab-content-work > ul {
+    position: relative;
+    padding: 50px 15px;
+    margin-bottom: 15px;
+    background: #E9E9E9;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 20px;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul > li.empty {}
+.fontface #network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul > li.empty {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+#network-canvas .network-canvas-item-container.canvas-item-container-highlight > li > .info > .views .tab-content-work > ul {
+    background: #c6decf;
+    color: #4b9b69;
+}
+#network-canvas .network-canvas-item-container > li.has-answer > .info > .views .tab-content-work > ul > li.empty {
+    display: none;
+}
+
+/* Item content - Info box - Work view - Work placeholder */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul > li.ui-sortable-placeholder {
+    display: none;
+}
+
+/* Item content - Info box - Work view - Work Title */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .title {
+    padding-left: 40px;
+    padding-top: 4px;
+    padding-bottom: 12px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.fontface #network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .title {
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+
+/* Item content - Info box - Work view - Work color */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .color {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Item content - Info box - Work view - Work actions */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .actions {
+    display: none;
+}
+
+/* Item content - Info box - Work view - Work Description */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .description {
+    padding-bottom: 8px;
+    word-wrap: break-word;
+}
+
+/* Item content - Info box - Work view - Work Attachments */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .attachments {}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .attachments ul {
+    list-style: none;
+    padding: 0;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .attachments ul li a {
+    display: block;
+    padding: 10px 10px 10px 30px;
+    border-top: 1px dashed #D0D0D0;
+    background-color: #F5F5F5;
+    background-image: url('/static/dreamdiary/img/icon-attachment.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    color: #3B8DC0;
+    text-decoration: none;
+}
+#network-canvas .network-canvas-item-container > li.removable-answer > .info > .views .tab-content-work > ul .attachments ul li:last-child a {
+    border-bottom: 1px dashed #D0D0D0;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .attachments ul li a:hover {
+    color: #3B8DC0;
+    text-decoration: underline;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > ul .attachments ul li a span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Item content - Info box - Work view - Remove work from task */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > .actions {
+    display: none;
+    padding: 15px 0;
+}
+#network-canvas .network-canvas-item-container > li.has-answer > .info > .views .tab-content-work > .actions {
+    display: block;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > .actions .remove {
+    display: block;
+    padding: 5px;
+    background: #e82222;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+}
+.borderradius #network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > .actions .remove {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-work > .actions .remove:hover {
+    background: #fa2424;
+}
+
+/* Item content -> Info box -> Task view -> Task description */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .description {
+    padding-bottom: 8px;
+    word-wrap: break-word;
+}
+
+/* Item content -> Info box -> Task view -> Task attachments */
+
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .attachments {}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .attachments ul {
+    list-style: none;
+    padding: 0;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .attachments ul li a {
+    display: block;
+    padding: 10px 10px 10px 30px;
+    border-top: 1px dashed #D0D0D0;
+    background-color: #F5F5F5;
+    background-image: url('/static/dreamdiary/img/icon-attachment.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    color: #3B8DC0;
+    white-space: nowrap;
+    text-decoration: none;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .attachments ul li a:hover {
+    color: #3B8DC0;
+    text-decoration: underline;
+}
+#network-canvas .network-canvas-item-container > li > .info > .views .tab-content-task .attachments ul li a span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Item connector  */
+
+#network-canvas .network-canvas-item-connector {
+    display: block;
+    background: #303030;
+}
+.borderradius #network-canvas .network-canvas-item-connector {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}

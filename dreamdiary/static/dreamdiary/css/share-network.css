@@ -1,0 +1,537 @@
+/*========================================================
+  Base - Layout
+========================================================*/
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body {
+    background: #FFFFFF;
+}
+html, body, #page {
+  width: 100%;
+  height: 100%;
+}
+#page {
+  position: relative;
+  overflow: hidden;
+}
+
+/*========================================================
+  Base - Typography
+========================================================*/
+
+body, input, textarea, button, select {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 23px;
+  color: #063145;
+}
+.fontface body, .fontface input, .fontface textarea, .fontface button, .fontface select {
+  font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h1, h2, h3 {
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+}
+.fontface h1, .fontface h2, .fontface h3 {
+  font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+b, strong {
+  font-weight: bold;
+}
+small {
+  font-size: 85%;
+}
+ins {
+  text-decoration: none;
+}
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+/*========================================================
+  Base - Links
+========================================================*/
+
+a, a:visited, a:hover, a:focus, a:active {
+  text-decoration: none;
+  outline: 0;
+}
+a, a:visited { 
+  color: #3B8DC0;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/*========================================================
+  Base - Forms
+========================================================*/
+
+input, textarea {
+  width: 100%;
+  border: 1px solid #E0E0E0;
+  background: #FFFFFF;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Prevent iPad from applying text-shadow */
+  -webkit-appearance: none;
+}
+input {
+  padding: 10px;
+  /* Normalizes input field height across browsers (except Opera's, standard line-height 18px) */
+  line-height: 17px;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: none;
+  padding: 10px;
+}
+label, button, input[type="button"], input[type="reset"], input[type="submit"] {
+/* Give clickable elements hand cursor */
+  cursor: pointer;
+}
+.boxshadow textarea:active, .boxshadow textarea:focus, .boxshadow input[type="text"]:active, .boxshadow input[type="text"]:focus {
+  -webkit-box-shadow:  0px 0px 5px 0px rgba(62, 142, 192, 0.5);
+  box-shadow:  0px 0px 5px 0px rgba(62, 142, 192, 0.5);
+  border-color: #3e8ec0 !important;
+}
+::-webkit-input-placeholder {
+    color: #B0B0B0 !important;
+    font-style: italic !important;
+}
+:-moz-placeholder {
+    color: #B0B0B0 !important;
+    font-style: italic !important;
+}
+
+/*========================================================
+  Base - Non-semantic helper classes
+========================================================*/
+
+.cf:before, .cf:after {
+  content: "";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+.cf {
+  *zoom: 1;
+}
+
+/*========================================================
+  Hide elements
+========================================================*/
+
+#dw-menu, .color-selector {
+  display: none;
+}
+
+/*========================================================
+  Header
+========================================================*/
+
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  padding: 0 15px;
+  height: 50px;
+  background-color: #063145;
+}
+#header h1 {
+  overflow: hidden;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: #53AADF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*========================================================
+  View selector
+========================================================*/
+
+#select-view {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: 34px;
+}
+#select-view .action {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 34px;
+  line-height: 34px;
+  background-color: #8C989F;
+  color: #FFFFFF;
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+}
+.fontface #select-view .action {
+  font-weight: 600;
+}
+#select-view .action:hover {
+  background-color: #99A7AF;
+}
+.show-selected-items #select-view .action.selected-items,
+.show-all-items #select-view .action.all-items {
+  background-color: #488E1E;
+}
+
+/*========================================================
+  Filtering
+========================================================*/
+
+#filters {
+  position: absolute;
+  top: 84px;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: 50px;
+  border-bottom: 1px solid #E9E9E9;
+}
+.show-selected-items #filters {
+  display: none;
+}
+.filtering {
+  height: 100%;
+  padding: 0 15px;
+}
+
+/* Search */
+
+.search {
+  float: left;
+  width: 200px;
+  height: 30px;
+  padding: 10px 0;
+}
+.search input {
+  width: 100%;
+  padding: 5px;
+  padding-left: 36px;
+  background: #fff url(/static/dreamdiary/img/icon-search.png) no-repeat 10px center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.fontface .search input {
+  font-weight: 600;
+}
+.search.searching input {
+  background: #fff url(/static/dreamdiary/img/spinner.gif) no-repeat 10px center;
+}
+
+/* Pagination */
+
+.pagination {
+  float: right;
+  width: 240px;
+  position: relative;
+  height: 40px;
+  margin: 5px 0;
+  background: #FFFFFF;
+}
+.pagination .previous,
+.pagination .next {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  top: 5px;
+}
+.pagination .previous {
+  background-image: url(/static/dreamdiary/img/pagination-left.png);
+  left: 0;
+}
+.pagination .previous.disabled {
+  background-image: url(/static/dreamdiary/img/pagination-left-inactive.png);
+}
+.pagination .next {
+  background-image: url(/static/dreamdiary/img/pagination-right.png);
+  right: 0;
+}
+.pagination .next.disabled {
+  background-image: url(/static/dreamdiary/img/pagination-right-inactive.png);
+  right: 0;
+}
+.pagination a.previous:hover,
+.pagination a.next:hover {
+  background-color: #58ad25;
+}
+.pagination a.previous:hover {
+  background-image: url(/static/dreamdiary/img/pagination-left-active.png);
+}
+.pagination a.next:hover {
+  background-image: url(/static/dreamdiary/img/pagination-right-active.png);
+}
+.pagination .pages {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #B0B0B0;
+  text-align: center;
+}
+.fontface .pagination .pages  {
+  font-weight: 600;
+}
+.pagination .pages form {
+  display: inline;
+}
+.pagination .pages input.current {
+  width: 40px;
+  padding: 3px;
+  margin: 0 10px;
+  border: 1px solid #E0E0E0;
+  color: #505050;
+  font-size: 13px;
+  text-align: center;
+}
+.fontface .pagination .pages input.current  {
+  font-weight: 600;
+}
+.pagination .pages .all {}
+
+
+/*========================================================
+  Views
+========================================================*/
+
+#views {
+  position: absolute;
+  top: 135px;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+.show-selected-items #views {
+  top: 84px;
+}
+
+/* Views - all lists */
+
+#views ul.item-list {}
+#views li.item {
+  position: relative;
+  padding: 10px 55px;
+  border-bottom: 1px solid #E9E9E9;
+}
+#views li.item:hover {
+  background: #F9F9F9;
+}
+#views .icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-indent: -99999px;
+  /* Positioning */
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+#views .icon img {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+#views .title {
+  display: block;
+  line-height: 22px;
+  padding: 4px 0;
+}
+#views .action {
+  display: block;
+  width: 30px;
+  height: 30px;
+  /* Positioning */
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+/* Views - select list */
+
+#all-items {
+  display: none;
+}
+.show-all-items #all-items {
+  display: block;
+}
+#all-items li.item {
+  cursor: pointer;
+}
+#all-items li.item.active {
+  background-color: #eaf4e7;
+}
+#all-items li.item.active .action {
+  background: transparent url('/static/dreamdiary/img/check.png') no-repeat center center;
+}
+
+/* Views - selected list */
+
+#selected-items {
+  display: none;
+}
+.show-selected-items #selected-items {
+  display: block;
+}
+#selected-items li.item .action {
+  background: transparent url('/static/dreamdiary/img/icon-remove.png') no-repeat center center;
+  cursor: pointer;
+}
+#selected-items li.item .action:hover {
+  background: #CC0000 url('/static/dreamdiary/img/icon-remove-active.png') no-repeat center center;
+}
+
+/* Views - selected list - empty list notification */
+
+.empty {
+  display: none;
+  border: 15px solid #FFFFFF;
+  padding: 50px;
+  background: #F9F9F9;
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 20px;
+}
+.not-shared .empty {
+  display: block;
+}
+.fontface .empty {
+  font-weight: 600;
+}
+
+/*========================================================
+  Footer
+========================================================*/
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: #f1f1f1;
+}
+.footer-container {
+  position: relative;
+  height: 32px;
+  padding: 9px 15px;
+}
+#footer form {
+  display: block;
+}
+
+/* Copyright */
+
+.copyright {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  height: 32px;
+  margin-top: -16px;
+}
+.copyright p {
+  float: right;
+  height: 32px;
+  line-height: 32px;
+  font-size: 11px;
+  color: #999;
+  text-align: right;
+  clear: right;
+}
+.copyright p.row {
+  height: 16px;
+  line-height: 16px;
+}
+
+/*========================================================
+  Buttons
+========================================================*/
+
+.button-1, .button-2, .button-3,
+a.button-1, a.button-2, a.button-3,
+input.button-1, input.button-2, input.button-3 {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px 15px;
+  margin: 0 10px 0 0;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+.button-1:hover, .button-2:hover, .button-3:hover,
+a.button-1:hover, a.button-2:hover, a.button-3:hover,
+input.button-1:hover, input.button-2:hover, input.button-3:hover {
+  text-decoration: none;
+}
+.button-1, a.button-1, input.button-1 {
+  background-color: #67a31e;
+}
+.button-1:hover, a.button-1:hover, input.button-1:hover {
+  background-color: #74b822;
+}
+.button-1:focus, a.button-1:focus, input.button-1:focus,
+.button-1:active, a.button-1:active, input.button-1:active {
+  background-color: #558818;
+}
+.button-2, a.button-2, input.button-2 {
+  background-color: #8c989f;
+}
+.button-2:hover, a.button-2:hover, input.button-2:hover {
+  background-color: #99a7af;
+}
+.button-2:focus, a.button-2:focus, input.button-2:focus,
+.button-2:active, a.button-2:active, input.button-2:active {
+  background-color: #6f7d85;
+}
+.button-3, a.button-3, input.button-3 {
+  background-color: #cb4121;
+}
+.button-3:hover, a.button-3:hover, input.button-3:hover {
+  background-color: #de4724;
+}
+.button-3:focus, a.button-3:focus, input.button-3:focus,
+.button-3:active, a.button-3:active, input.button-3:active {
+  background-color: #af3113;
+}

@@ -1,0 +1,87 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n dreamdiarytags %}
+
+{% block page_title %}{% if work %}{% trans 'Edit work' %}{% else %}{% trans 'Create new work' %}{% endif %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-user page-work {% if work %}page-edit-work{% else %}page-new-work{% endif %}{% endblock %}
+
+{% block fluid_column %}
+
+  <div class="header">
+    <h1>{% if work %}{% trans 'Edit work' %}{% else %}{% trans 'Create new work' %}{% endif %}</h1>
+  </div>
+
+  <div class="info-form">
+    <form id="add-work" method="post">
+    
+      <div class="title">
+        <label for="work-title">{% trans 'Work title' %}</label>
+        <div>
+          {% if work %}
+          <div class="color-wrap">
+            <div class="color" title="{{ work.color.title }}" data-color-item-id="{{ work.id }}" data-color-item-type="work">
+              <span style="{% if work.color.color %}background-color:{{ work.color.color }};{% endif %}"></span>
+            </div>
+          </div>
+          {% endif %}
+          <input type="text" name="workTitle" id="work-title" placeholder="{% trans 'Type work title here...' %}" value="{{ work.title }}" {% if not work %}autofocus="autofocus"{% endif %} />
+        </div>
+      </div>
+
+      <div class="description">
+        <label for="work-description">{% trans 'Work description' %}</label>
+        <textarea cols="100" rows="7" name="workDesc" id="work-description" placeholder="{% trans 'Type work description here...' %}">{{ work.description }}</textarea>
+      </div>
+
+      <div class="add-attachment">
+        <label for="add-attachment">{% trans 'Attachments' %}</label>
+        <input type="text" placeholder="{% trans 'Type attachment URL here and press Enter...' %}" id="add-attachment" />
+        <span id="add-attachment-button" title="{% trans 'Add attachment' %}"></span>
+      </div>
+
+      <div id="attachment-list" class="attachments">
+        <ul>
+        {% for attachment in work.attachments.all %}
+          <li>
+            <span class="title"><a href="{{ attachment.url }}" target="_blank">{{ attachment.url }}</a></span>
+            <span class="remove" title="{% trans 'Remove' %}"></span>
+            <input type="hidden" name="attachment[]" value="{{ attachment.url }}" />
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+
+      <div class="actions cf">
+        <input class="button-1" type="submit" name="save" value="{% trans 'Save' %}" />
+        {% if work %}
+        <div style="float:right;">
+          {% if work.is_archived %}
+            <input class="button-2" type="submit" name="unarchive" value="{% trans 'Remove from archive' %}" />
+            {% if work.can_be_deleted %}<input class="button-3" type="submit" name="delete" value="{% trans 'Remove' %}" />{% endif %}
+          {% else %}
+            <input class="button-2" type="submit" name="archive" value="{% trans 'Move to archive' %}" />
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+    </form>
+  </div><!-- /.work-info -->
+
+{% endblock %}
+
+{% block fixed_column %}
+
+  <div class="header">
+    <h2>{% trans "Works" %}</h2>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+      <a class="action add" href="{% url user_edit_work %}" title="{% trans 'Create new' %}"></a>
+    </div>
+    <div class="search js-filter-search" data-filter-id="work">
+      <form><input type="text" value="" placeholder="{% trans 'Search works...' %}" /></form>
+    </div>
+  </div>
+
+  {% include "dreamdiary/user/snippets/work_list.html" with items=works bottom_item=work_bottom_item %}
+  
+{% endblock %}

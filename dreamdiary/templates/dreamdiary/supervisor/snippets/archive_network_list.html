@@ -1,0 +1,40 @@
+{% load i18n %}
+
+<div class="pagination js-filter-paginator" data-filter-id="network" data-pagination-url="{% url ajax_paginated_snippet %}?t=network&amp;a=1">
+
+  <div class="pages">{% trans 'Page' %}
+    <form><input type="text" class="current js-filter-current" value="{{ items.number }}" /></form> /
+    <span class="all">{{ items.paginator.num_pages }}</span>
+  </div>
+
+  {% if items.has_previous %}
+    <a href="{{ items.previous_page_number }}" class="previous js-filter-previous" title="{% trans 'Previous page' %}"></a>
+  {% else %}
+    <span class="previous-inactive"></span>
+  {% endif %}
+
+  {% if items.has_next %}
+    <a href="{{ items.next_page_number }}" class="next js-filter-next" title="{% trans 'Next page' %}"></a>
+  {% else %}
+    <span class="next-inactive"></span>
+  {% endif %}
+
+</div>
+
+<ul class="archive-list js-filter-content" data-filter-id="network">
+
+  {% if top_item %}
+   {% include "dreamdiary/supervisor/snippets/archive_network.html" with network=top_item %}
+  {% endif %}
+
+  {% for network in items %}
+    {% include 'dreamdiary/supervisor/snippets/archive_network.html' with network=network %}
+  {% empty %}
+    <li class="archive-item empty"><span>{% trans 'You have no archived learning networks' %}</span></li>
+  {% endfor %}
+
+  {% if bottom_item %}
+    {% include "dreamdiary/supervisor/snippets/archive_network.html" with network=bottom_item %}
+  {% endif %}
+
+</ul>

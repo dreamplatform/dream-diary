@@ -1,0 +1,18 @@
+{% load i18n %}
+<li class="sortable-item" data-id="{{ network.id }}" data-type="network">
+
+  <div class="title">
+    <a class="sortable-handle" href="{% url network network.id %}">{{ network.title }}</a>
+  </div>
+
+  <div class="color" title="{{ network.color.title }}" data-color-item-id="{{ network.id }}" data-color-item-type="network">
+    <span style="{% if network.color.color %}background-color:{{ network.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <a class="action edit" href="{% url supervisor_edit_network network.id %}" title="{% trans 'Edit' %}"></a>
+    <a class="action share modalWindow{% if network.usergroups.all %} active{% endif %}" href="{% url supervisor_share_network network.id %}" title="{% trans 'Share' %}"></a>
+  </div>
+
+</li>
+

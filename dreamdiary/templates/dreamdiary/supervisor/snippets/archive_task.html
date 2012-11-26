@@ -1,0 +1,22 @@
+{% load i18n dreamdiarytags %}
+
+<li class="archive-item" data-id="{{ task.id }}" data-type="task">
+
+  <div class="title">
+    <a href="{% url supervisor_edit_task task.id %}">{{ task.title }}</a>
+  </div>
+
+  <div class="color" title="{{ task.color.title }}" data-color-item-id="{{ task.id }}" data-color-item-type="task">
+    <span style="{% if task.color.color %}background-color: {{ task.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <form class="archive-actions-form" method="post" action="?p={{ items.number}}">
+      {% if task.can_be_deleted %}<input type="submit" name="delete" value="" class="action delete" title="{% trans 'Remove' %}" />{% endif %}
+      <input type="submit" name="unarchive" value="" class="action unarchive" title="{% trans 'Remove from archive' %}" />
+      <input type="hidden" name="type" value="task" />
+      <input type="hidden" name="id" value="{{ task.id }}" />
+    </form>
+  </div>
+
+</li>

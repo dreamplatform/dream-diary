@@ -1,0 +1,145 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n dreamdiarytags %}
+
+{% block page_title %}{{ network.title }} | {{ block.super }}{% endblock %}
+{% block body_class %}page-user page-network{% endblock %}
+
+{% block page_stylesheets %}
+<link rel="stylesheet" href="/static/dreamdiary/css/network-canvas-view.css" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_scripts_bottom %}
+<script type="text/javascript" src="/static/dreamdiary/js/network-canvas-user.js"></script>
+<script type="text/javascript" src="/static/dreamdiary/js/jquery.zoomooz.min.js"></script>
+{% endblock %}
+
+{% block fluid_column %}
+
+  <div class="header">
+    <div class="color disable-color" title="{{ network.color.title }}" data-color-item-id="{{ task.id }}" data-color-item-type="network">
+      <span style="{% if network.color.color %}background-color:{{ network.color.color }};{% endif %}"></span>
+    </div>
+    <h1>{{ network.title }}</h1>
+    <div class="actions">
+      <span class="action scale scale-item scale-minimap" title="{% trans 'Minimap' %}"></span>
+    </div>
+  </div>
+
+  <div id="network-canvas-outer-wrap">
+
+    <div id="network-canvas-container">
+      <div id="network-canvas-handle">
+        <div id="zoomViewport">
+          <div id="zoomContainer">
+            <div id="network-canvas" data-id="{{ network.id }}">
+
+              {% for connection in network.connections %}
+              {% with task=connection.task answers=connection.answers|answers_for_user:user %}
+
+                <ul class="network-canvas-item-container" data-coord="{% hierarchy_item_coord network.hierarchy_data task.id %}">
+
+                    <li class="task{% if answers %} has-answer {% else %} no-answer {% endif %}" data-id="{{ task.id }}" data-type="task">
+
+                    <div class="title">
+                      <div>
+                        <span class="text">{{ task.title }}</span>
+                        <span class="arrow"></span>
+                      </div>
+                    </div>
+
+                    <div class="color" title="{{ task.color.title }}" data-color-item-id="{{ task.id }}" data-color-item-type="task">
+                      <span style="{% if task.color.color %}background-color:{{ task.color.color }};{% endif %}"></span>
+                    </div>
+
+                    <div class="answer-indicator"></div>
+
+                    <div class="info">
+
+                      <div class="arrow"></div>
+                      <div class="title"><span class="link"><a href="#">{{ task.title }}</a></span><span class="close" title="{% trans 'Close task' %}"></span></div>
+
+                      <div class="view-switch cf">
+                        <span class="tab active" data-tab-target="tab-content-work">{% trans 'Answer' %}<span class="arrow"></span></span>
+                        <span class="tab" data-tab-target="tab-content-task">{% trans 'Task' %}<span class="arrow"></span></span>
+                      </div>
+
+                      <div class="views">
+
+                        <div class="tab-content tab-content-work active">
+
+                          <ul class="returned-work" data-sortable-connect-id="canvas-work">
+
+                            <li class="empty">{% trans 'Drag answer here' %}</li>
+
+                            {% for answer in answers %}
+                              {% include "dreamdiary/user/snippets/work.html" with work=answer.work %}
+                            {% endfor %}
+
+                          </ul>
+
+                          <div class="actions">
+                            <span class="action remove">{% trans 'Remove answer' %}</span>
+                          </div>
+
+                        </div><!-- /.tab-content-work -->
+
+                        <div class="tab-content tab-content-task">
+                          <div class="description">{{ task.description }}</div>
+
+                          {% if task.attachments.all.count > 0 %}
+                          <div class="attachments">
+                            <ul>
+
+                            {% for attachment in task.attachments.all %}
+                              <li><a href="{{ attachment.url }}" target="_blank"><span>{{ attachment.url }}</span></a></li>
+                            {% endfor %}
+
+                            </ul>
+                          </div>
+                          {% endif %}
+
+                        </div><!-- /.tab-content-task -->
+
+                      </div><!-- /.views -->
+
+                    </div><!-- /.info -->
+
+                  </li><!-- /.task -->
+
+                </ul><!-- /.network-canvas-item-container -->
+                {% endwith %}
+                {% endfor %}
+
+                {% for connector in network.hierarchy_connectors %}
+                  {% if connector.type == "connector-vertical" %}
+                  <div class="network-canvas-item-connector vertical active" data-coord="{{ connector.x }}_{{ connector.y }}"></div>
+                  {% else %}
+                  <div class="network-canvas-item-connector horizontal active" data-coord="{{ connector.x }}_{{ connector.y }}"></div>
+                  {% endif %}
+                {% endfor %}
+
+            </div><!-- /#network-canvas -->
+          </div><!-- /#zoomContainer -->
+        </div><!-- /#zoomViewport -->
+      </div><!-- /#network-canvas-handle -->
+    </div><!-- /#network-canvas-container -->
+  </div><!-- /#network-canvas-outer-wrap -->
+
+{% endblock %}
+
+{% block fixed_column %}
+
+  <div class="header">
+    <h2>{% trans 'Works' %}</h2>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+      <a class="action add" href="{% url user_edit_work %}" title="{% trans 'Create new' %}"></a>
+    </div>
+    <div class="search js-filter-search" data-filter-id="work">
+      <form><input type="text" value="" placeholder="{% trans 'Search works...' %}" /></form>
+    </div>
+  </div>
+
+ {% include "dreamdiary/user/snippets/work_list.html" with items=works bottom_item=work_bottom_item %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans 'Archive' %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-supervisor page-archive{% endblock %}
+{% block dw_menu_archive %}active{% endblock %}
+
+{% block page_container %}
+
+  <div id="content-container">
+    <div class="col-content">
+
+      <div class="header">
+        <h1>
+          <span class="tab active" data-tab-id="1">{% trans 'Networks' %}</span><span class="tab-divider">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="tab" data-tab-id="2">{% trans 'Tasks' %}</span>
+        </h1>
+      </div>
+
+      <div class="tab-content active" data-tab-id="1">
+        <div class="search js-filter-search" data-filter-id="network">
+          <form><input type="text" value="" placeholder="{% trans 'Search networks...' %}" /></form>
+        </div>
+        {% include 'dreamdiary/supervisor/snippets/archive_network_list.html' with items=networks bottom_item=network_bottom_item top_item=network_top_item %}
+      </div>
+
+      <div class="tab-content" data-tab-id="2">
+        <div class="search js-filter-search" data-filter-id="task">
+          <form><input type="text" value="" placeholder="{% trans 'Search tasks...' %}" /></form>
+        </div>
+        {% include 'dreamdiary/supervisor/snippets/archive_task_list.html' with items=tasks bottom_item=task_bottom_item top_item=task_top_item %}
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <p>{% trans '#copyright' %}</p>
+    </div>
+  </footer><!-- /#footer -->
+
+{% endblock %}

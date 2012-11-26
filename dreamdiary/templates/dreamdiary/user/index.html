@@ -1,0 +1,39 @@
+{% extends "dreamdiary/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans 'Home' %} | {{ block.super }}{% endblock %}
+{% block body_class %}page-user page-index{% endblock %}
+{% block dw_menu_home %}active{% endblock %}
+
+{% block fluid_column %}
+
+  <div class="header">
+    <h1>{% trans 'Networks' %}</h1>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+    </div>
+    <div class="search js-filter-search" data-filter-id="network">
+      <form><input type="text" value="" placeholder="{% trans 'Search networks...' %}" /></form>
+    </div>
+  </div>
+
+  {% include "dreamdiary/user/snippets/network_list.html" with items=networks bottom_item=network_bottom_item %}
+
+{% endblock %}
+
+{% block fixed_column %}
+
+  <div class="header">
+    <h2>{% trans 'Works' %}</h2>
+    <div class="actions">
+      <span class="action open-search" title="{% trans 'Search' %}"></span>
+      <a class="action add" href="{% url user_edit_work %}" title="{% trans 'Create new' %}"></a>
+    </div>
+    <div class="search js-filter-search" data-filter-id="work">
+      <form><input type="text" value="" placeholder="{% trans 'Search works...' %}" /></form>
+    </div>
+  </div>
+
+  {% include "dreamdiary/user/snippets/work_list.html" with items=works bottom_item=work_bottom_item %}
+  
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load i18n dreamdiarytags %}
+
+<li class="task sortable-item" data-id="{{ task.id }}" data-type="task">
+
+  <div class="title">
+    <a class="sortable-handle" href="{% url supervisor_edit_task task.id %}"><span class="text">{{ task.title }}</span><span class="arrow"></span></a>
+  </div>
+
+  <div class="color" title="{{ task.color.title }}" data-color-item-id="{{ task.id }}" data-color-item-type="task">
+    <span style="{% if task.color.color %}background-color: {{ task.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <span class="action remove" title="{% trans 'Remove' %}"></span>
+  </div>
+
+  <div class="info">
+
+    <div class="description">{{ task.description }}</div>
+
+    {% if task.attachments.all.count > 0 %}
+    <div class="attachments">
+      <ul>
+      {% for attachment in task.attachments.all %}
+        <li><a href="{{ attachment.url }}" target="_blank"><span>{{ attachment.url }}</span></a></li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+  </div>
+
+</li>

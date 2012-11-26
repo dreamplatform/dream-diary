@@ -1,0 +1,32 @@
+{% load i18n dreamdiarytags %}
+
+<li class="work sortable-item" data-id="{{ work.id }}" data-type="work">
+
+  <div class="title">
+    <a class="sortable-handle" href="{% url user_edit_work work.id %}"><span class="text">{{ work.title }}</span><span class="arrow"></span></a>
+  </div>
+
+  <div class="color" title="{{ work.color.title }}" data-color-item-id="{{ work.id }}" data-color-item-type="work">
+    <span style="{% if work.color.color %}background-color:{{ work.color.color }};{% endif %}"></span>
+  </div>
+
+  <div class="actions">
+    <span class="action remove" title="{% trans 'Remove' %}">{% trans 'Remove' %}</span>
+  </div>
+
+  <div class="info">
+    <div class="description">{{ work.description }}</div>
+    {% if work.attachments.all.count > 0 %}
+    <div class="attachments">
+      <ul>
+
+      {% for attachment in work.attachments.all %}
+        <li><a href="{{ attachment.url }}" target="_blank"><span>{{ attachment.url }}</span></a></li>
+      {% endfor %}
+
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+</li>

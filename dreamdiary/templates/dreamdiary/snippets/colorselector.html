@@ -1,0 +1,21 @@
+{% load i18n dreamdiarytags %}
+<div class="color-selector">
+  <div class="title">
+    <div class="arrow"></div>
+    <span class="text">{% trans 'Choose color' %}</span>
+    <span class="close"></span>
+  </div>
+  <div class="color-swatch cf">
+    {% for color in colors %}
+      <div class="color-item-wrap" title="{{ color.title }}"><div class="color-item" style="background-color: {{ color.color }};"></div></div>
+    {% endfor %}
+   </div>
+  <div class="active-color">
+    <input type="text" placeholder="{% trans 'Type color title here...' %}" />
+    <span class="color-indicator"></span>
+  </div>
+  <div class="actions cf">
+    <span class="button-1 save">{% trans 'Save' %}</span>
+    <span class="button-2 cancel">{% trans 'Close' %}</span>
+  </div>
+</div>
